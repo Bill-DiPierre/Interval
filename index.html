@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <style>
+            body {
+                font-size: x-large;
+                text-align: center;
+            }
+            .button {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+        <span id="lblMinutes">13</span>
+        <span>:</span>
+        <span id="lblSeconds">00</span>
+        <br>
+        <input type="button" id="btnGo" class="button" value="Go!" onclick="startTimer();">  
+        <br><br>
+        <span id="lblRunWalk">Waiting</span>      
+        <span id="lblInterval">0</span>
+    </body>
+</html>
+
+<script>
+    var gTotalSeconds;
+    var gIntervalSeconds;
+    var gIntervalCount;
+    var myTimer;
+    var gIncrements = [15, 15, 30, 30, 45, 45, 60, 60, 90, 90, 60, 60, 45, 45, 30, 30, 15, 15];
+
+    function startTimer(){
+        $('#btnGo').prop('disabled', true);
+        gTotalSeconds = 13 * 60  + 1;
+        gIntervalSeconds = 1;
+        gIntervalCount = 0;
+        myTimer = setInterval(updateTimers, 1000);
+    }
+
+    function updateTimers(){
+        gTotalSeconds -= 1
+        $('#lblMinutes').text(Math.floor(gTotalSeconds / 60) );
+        $('#lblSeconds').text(gTotalSeconds % 60);
+        if (gTotalSeconds === 0){
+            clearInterval(myTimer);
+            $('#lblRunWalk').text('You Finished!');
+            $('#lblInterval').text('');
+            $('#btnGo').prop('disabled', false);
+        }
+        else{
+            updateIntervalTimer();
+        }
+    }
+
+    function updateIntervalTimer(){
+        gIntervalSeconds -= 1;
+        if (gIntervalSeconds === 0){
+            gIntervalSeconds = gIncrements[gIntervalCount];
+            if (gIntervalCount % 2 === 0) {
+                $('#lblRunWalk').text('Run');
+                $('#lblRunWalk').css("color", "green");
+                $('#lblInterval').css('color', 'green');
+            }
+            else{
+                $('#lblRunWalk').text('Walk');
+                $('#lblRunWalk').css("color", "red");
+                $('#lblInterval').css('color', 'red');
+            }
+            gIntervalCount += 1;
+        }
+        $('#lblInterval').text(gIntervalSeconds);
+        if (gIntervalSeconds <= 5){
+            // console.log(gIntervalSeconds);
+        }
+    }
+    
+</script>

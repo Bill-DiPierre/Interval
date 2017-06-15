@@ -35,8 +35,7 @@
         <span id="lblInterval">0</span>
 
 
-        <audio id="beep2" src="http://www.soundjay.com/button/beep-02.wav"></audio>
-        <audio id="beep3" src="http://www.soundjay.com/button/beep-03.wav"></audio>
+        <audio id="beep" ></audio>
 
     </body>
 </html>
@@ -89,12 +88,23 @@
         }
         $('#lblInterval').text(gIntervalSeconds);
         if (gIntervalSeconds === 16){
-            document.getElementById('beep2').play();
+            beep(true);
         }
         if (gIntervalSeconds <= 5){
-            console.log(gIntervalSeconds);
-            document.getElementById('beep2').play();
+            beep(false);
         }
+    }
+
+    function beep(longbeep){
+        var beep =  document.getElementById('beep');
+        if (longbeep){
+            beep.src = "http://www.soundjay.com/button/beep-03.wav";
+        }
+        else{
+            beep.src = "http://www.soundjay.com/button/beep-02.wav";
+        }
+        beep.play();
+    
     }
 
 </script>

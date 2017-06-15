@@ -33,6 +33,11 @@
         <br><br>
         <span id="lblRunWalk">Waiting</span>      
         <span id="lblInterval">0</span>
+
+
+        <audio id="beep2" src="http://www.soundjay.com/button/beep-02.wav"></audio>
+        <audio id="beep3" src="http://www.soundjay.com/button/beep-03.wav"></audio>
+
     </body>
 </html>
 
@@ -83,9 +88,13 @@
             gIntervalCount += 1;
         }
         $('#lblInterval').text(gIntervalSeconds);
+        if (gIntervalSeconds === 16){
+            document.getElementById('beep2').play();
+        }
         if (gIntervalSeconds <= 5){
-            // console.log(gIntervalSeconds);
+            console.log(gIntervalSeconds);
+            document.getElementById('beep2').play();
         }
     }
-    
+
 </script>

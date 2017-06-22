@@ -52,7 +52,7 @@
         gTotalSeconds = 13 * 60  + 1;
         gIntervalSeconds = 1;
         gIntervalCount = 0;
-        myTimer = setInterval(updateTimers, 1000);
+        myTimer = setInterval(updateTimers, 100);
     }
 
     function updateTimers(){
@@ -87,10 +87,15 @@
             gIntervalCount += 1;
         }
         $('#lblInterval').text(gIntervalSeconds);
+        if (gIntervalSeconds > 16){
+            document.body.style.background = 'white';
+        }
         if (gIntervalSeconds === 16){
+            document.body.style.background = 'orange';
             beep(true);
         }
         if (gIntervalSeconds <= 5){
+            document.body.style.background = 'hotpink';
             beep(false);
         }
     }
